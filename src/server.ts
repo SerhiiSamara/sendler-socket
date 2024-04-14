@@ -40,7 +40,7 @@ export default io.on("connection", (socket) => {
 	socket.on(
 		'message',
 		async (message, roomName) => {
-			const updateBalanceInRealTime = async (i) => {
+			const updateBalanceInRealTime = async (i: number) => {
 				if (i <= 0) {
 					return 0;
 				}
