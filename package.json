@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
+		"build": "tsc -p ./src",
 		"dev": "concurrently -k \"tsc -p ./src -w\" \"nodemon ./dist/src/server.js\"",
 		"test": "echo \"Error: no test specified\""
 	},
