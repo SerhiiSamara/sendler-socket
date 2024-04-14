@@ -1,0 +1,22 @@
+{
+	"name": "tssocktutorial",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"dev": "concurrently -k \"tsc -p ./src -w\" \"nodemon ./dist/src/server.js\"",
+		"test": "echo \"Error: no test specified\""
+	},
+	"author": "Serhii Samara",
+	"license": "ISC",
+	"dependencies": {
+		"@types/pg": "^8.11.5",
+		"@types/socket.io": "^3.0.2",
+		"dotenv": "^16.4.5",
+		"pg": "^8.11.5",
+		"socket.io": "^4.7.5"
+	},
+	"devDependencies": {
+		"concurrently": "^8.2.2",
+		"nodemon": "^3.1.0"
+	}
+}
