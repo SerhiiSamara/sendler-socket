@@ -6,6 +6,22 @@ import fetchUserPendingSms from "./fetchUserPendingSms";
 import fetchUserSentSms from "./fetchUserSentSms";
 import updateUserBalance from "./updateUserBalance";
 import fetchUserPaymentHistory from "./fetchUserPaymentHistory";
+import fetchUserRejectedSmsByUserId from "./fetchUserRejectedSmsByUserId";
+
+import { QueryResult } from "pg";
+
+import {
+	IUser,
+	IResAjustmentSms,
+	IResPaidSms,
+	IPaymentHistory,
+	IResDeliveredSms,
+	IResSentdSms,
+	IResPendingSms,
+	IResRejectedSms
+} from "../globaltypes/types";
+
+
 
 export default async function fetchUser(id: number) {
 	try {
@@ -44,29 +60,31 @@ export default async function fetchUser(id: number) {
 		};
 
 		const user = res.rows[0];
-		const deliveredSms = await fetchUserDeliveredSms(Number(id));
+		const deliveredSms: QueryResult<IResDeliveredSms> = await fetchUserDeliveredSms(Number(id));
 		user.delivered_sms = Number(deliveredSms.rows[0].delevered_sms);
 
-		const sentSms = await fetchUserSentSms(Number(id));
+		const sentSms: QueryResult<IResSentdSms> = await fetchUserSentSms(Number(id));
 		user.sent_sms = Number(sentSms?.rows[0].sent_sms);
 
-		const pendingSms = await fetchUserPendingSms(Number(id));
+		const pendingSms: QueryResult<IResPendingSms> = await fetchUserPendingSms(Number(id));
 		user.pending_sms = Number(pendingSms?.rows[0].pending_sms);
 
-		const paidSms = await fetchUserPaidSms(Number(id));
+		const rejectedSms: QueryResult<IResRejectedSms> = await fetchUserRejectedSmsByUserId(Number(id));
+		user.rejected_sms = Number(rejectedSms?.rows[0].rejected_sms);
+
+		const paidSms: QueryResult<IResPaidSms> = await fetchUserPaidSms(Number(id));
 		user.paid_sms = Number(paidSms?.rows[0].paid_sms);
 
-		const adjusmentSms = await fetchUserAdjusmentSms(Number(id));
+		const adjusmentSms: QueryResult<IResAjustmentSms> = await fetchUserAdjusmentSms(Number(id));
 		user.adjusment_sms = Number(adjusmentSms?.rows[0].sum);
 
-		let paymentHistory = await fetchUserPaymentHistory(Number(id));
+		let paymentHistory: QueryResult<IPaymentHistory> = await fetchUserPaymentHistory(Number(id));
 		user.paymentHistory = paymentHistory.rows;
 
 		user.alfa_names_active = alfaNamesActive;
 		user.alfa_names_disable = alfaNamesDisable;
 
 		return user;
-		return id;
 	} catch (error) {
 		console.log(error.message);
 	}

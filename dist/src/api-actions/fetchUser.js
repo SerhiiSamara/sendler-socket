@@ -20,6 +20,7 @@ const fetchUserPendingSms_1 = __importDefault(require("./fetchUserPendingSms"));
 const fetchUserSentSms_1 = __importDefault(require("./fetchUserSentSms"));
 const updateUserBalance_1 = __importDefault(require("./updateUserBalance"));
 const fetchUserPaymentHistory_1 = __importDefault(require("./fetchUserPaymentHistory"));
+const fetchUserRejectedSmsByUserId_1 = __importDefault(require("./fetchUserRejectedSmsByUserId"));
 function fetchUser(id) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -58,6 +59,8 @@ function fetchUser(id) {
             user.sent_sms = Number(sentSms === null || sentSms === void 0 ? void 0 : sentSms.rows[0].sent_sms);
             const pendingSms = yield (0, fetchUserPendingSms_1.default)(Number(id));
             user.pending_sms = Number(pendingSms === null || pendingSms === void 0 ? void 0 : pendingSms.rows[0].pending_sms);
+            const rejectedSms = yield (0, fetchUserRejectedSmsByUserId_1.default)(Number(id));
+            user.rejected_sms = Number(rejectedSms === null || rejectedSms === void 0 ? void 0 : rejectedSms.rows[0].rejected_sms);
             const paidSms = yield (0, fetchUserPaidSms_1.default)(Number(id));
             user.paid_sms = Number(paidSms === null || paidSms === void 0 ? void 0 : paidSms.rows[0].paid_sms);
             const adjusmentSms = yield (0, fetchUserAdjusmentSms_1.default)(Number(id));
@@ -67,7 +70,6 @@ function fetchUser(id) {
             user.alfa_names_active = alfaNamesActive;
             user.alfa_names_disable = alfaNamesDisable;
             return user;
-            return id;
         }
         catch (error) {
             console.log(error.message);

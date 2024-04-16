@@ -73,6 +73,10 @@ export interface IResSentdSms {
 	sent_sms: string;
 };
 
-export interface IResPendingdSms {
+export interface IResPendingSms {
 	pending_sms: string;
+};
+
+export interface IResRejectedSms {
+	rejected_sms: string;
 };
