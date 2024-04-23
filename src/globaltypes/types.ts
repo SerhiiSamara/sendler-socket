@@ -20,7 +20,12 @@ export interface IUser extends ITel, IUserId {
 	alfa_names_disable: string[];
 	sent_sms: number;
 	delivered_sms: number;
+	pending_sms: number;
+	paid_sms: number;
+	adjusment_sms: number;
+	rejected_sms: number;
 	paymentHistory: IPaymentHistory[];
+	sendingSms: ISendingProcess[];
 };
 
 export interface IPaymentHistory {
@@ -79,4 +84,21 @@ export interface IResPendingSms {
 
 export interface IResRejectedSms {
 	rejected_sms: string;
+};
+
+export interface IResAlfaNames {
+	alfa_name: string;
+	alfa_name_active: boolean;
+};
+
+export interface IResUserBalance {
+	result: number;
+};
+
+export interface ISendingProcess {
+	history_id: number;
+	fullfield?: number;
+	rejected?: number;
+	pending?: number;
+	date: Date;
 };

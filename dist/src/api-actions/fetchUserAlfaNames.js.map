@@ -1,0 +1,1 @@
+{"version":3,"file":"fetchUserAlfaNames.js","sourceRoot":"","sources":["../../../src/api-actions/fetchUserAlfaNames.ts"],"names":[],"mappings":";;;;;;;;;;;;;;AAAA,kDAA0B;AAK1B,SAA8B,kBAAkB,CAAC,EAAU;;QAC1D,MAAM,GAAG,GAA+B,MAAM,YAAE,CAAC,KAAK,CAAC;;mBAErC,EAAE,EAAE,CACrB,CAAC;QACF,OAAO,GAAG,CAAC;IACZ,CAAC;CAAA;AAND,qCAMC;AAAA,CAAC"}

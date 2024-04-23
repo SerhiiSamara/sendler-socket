@@ -8,7 +8,7 @@ import fetchUserPendingSms from "./fetchUserPendingSms";
 import {
 	IResPaidSms,
 	IResDeliveredSms,
-	IResPendingdSms,
+	IResPendingSms,
 	IResAjustmentSms
 } from "../globaltypes/types";
 
@@ -28,7 +28,7 @@ export default async function updateUserBalance(id: number | undefined): Promise
 			const resDeliveredSms: QueryResult<IResDeliveredSms> = await fetchUserDeliveredSms(id);
 			deliveredSms = Number(resDeliveredSms.rows[0].delevered_sms);
 
-			const resPendigSms: QueryResult<IResPendingdSms> = await fetchUserPendingSms(id);
+			const resPendigSms: QueryResult<IResPendingSms> = await fetchUserPendingSms(id);
 			pendingSms = Number(resPendigSms.rows[0].pending_sms);
 
 			const resAjustmentSms: QueryResult<IResAjustmentSms> = await fetchUserAdjusmentSms(id);

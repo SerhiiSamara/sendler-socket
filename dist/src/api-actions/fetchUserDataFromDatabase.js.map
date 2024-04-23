@@ -1,0 +1,1 @@
+{"version":3,"file":"fetchUserDataFromDatabase.js","sourceRoot":"","sources":["../../../src/api-actions/fetchUserDataFromDatabase.ts"],"names":[],"mappings":";;;;;;;;;;;;;;AAAA,kDAA0B;AAK1B,SAA8B,yBAAyB,CAAC,EAAU;;QACjE,MAAM,GAAG,GAAuB,MAAM,YAAE,CAAC,KAAK,CAAC;;oBAE5B,EAAE,EAAE,CACtB,CAAC;QACF,OAAO,GAAG,CAAC;IACZ,CAAC;CAAA;AAND,4CAMC;AAAA,CAAC"}
