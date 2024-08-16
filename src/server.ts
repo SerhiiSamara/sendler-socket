@@ -3,6 +3,7 @@ import 'dotenv/config';
 import fetchUser from './api-actions/fetchUser';
 const { NEXT_APP_URL, SOCKET_PORT } = process.env;
 import { IUser } from './globaltypes/types'
+import deleteOutdatePendingStatus from './api-actions/deleteOutdatePendingStatus';
 
 interface ServerToClientEvents {
 	message: (user: IUser) => void;
@@ -45,6 +46,7 @@ export default io.on("connection", (socket) => {
 					return 0;
 				}
 				timeOut = setTimeout<[]>(async () => {
+					await deleteOutdatePendingStatus(Number(message));
 					const user: IUser = await fetchUser(message);
 					if (user) {
 						console.log("User balance", user.balance);
@@ -53,7 +55,7 @@ export default io.on("connection", (socket) => {
 					return await updateBalanceInRealTime(i - 10000);
 				}, 10000);
 			};
-			await updateBalanceInRealTime(21600000);
+			await updateBalanceInRealTime(172800000);
 		});
 	socket.on("disconnect", (reason) => {
 		clearTimeout(timeOut);

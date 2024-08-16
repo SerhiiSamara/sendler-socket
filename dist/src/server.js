@@ -16,6 +16,7 @@ const socket_io_1 = require("socket.io");
 require("dotenv/config");
 const fetchUser_1 = __importDefault(require("./api-actions/fetchUser"));
 const { NEXT_APP_URL, SOCKET_PORT } = process.env;
+const deleteOutdatePendingStatus_1 = __importDefault(require("./api-actions/deleteOutdatePendingStatus"));
 const io = new socket_io_1.Server(Number(SOCKET_PORT), {
     cors: {
         origin: NEXT_APP_URL,
@@ -31,6 +32,7 @@ exports.default = io.on("connection", (socket) => {
                 return 0;
             }
             timeOut = setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
+                yield (0, deleteOutdatePendingStatus_1.default)(Number(message));
                 const user = yield (0, fetchUser_1.default)(message);
                 if (user) {
                     console.log("User balance", user.balance);
@@ -39,7 +41,7 @@ exports.default = io.on("connection", (socket) => {
                 return yield updateBalanceInRealTime(i - 10000);
             }), 10000);
         });
-        yield updateBalanceInRealTime(21600000);
+        yield updateBalanceInRealTime(172800000);
     }));
     socket.on("disconnect", (reason) => {
         clearTimeout(timeOut);

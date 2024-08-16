@@ -5,7 +5,7 @@ import fetchUserPendingSms from "./fetchUserPendingSms";
 import fetchUserSentSms from "./fetchUserSentSms";
 import updateUserBalance from "./updateUserBalance";
 import fetchUserPaymentHistory from "./fetchUserPaymentHistory";
-import fetchUserRejectedSmsByUserId from "./fetchUserRejectedSmsByUserId";
+import fetchUserRejectedSms from "./fetchUserRejectedSms";
 import fetchUserAlfaNames from "./fetchUserAlfaNames";
 import fetchUserDataFromDatabase from "./fetchUserDataFromDatabase";
 import fetchUserSmsSendingInProgress from "./fetchUserSmsSendingInProgress";
@@ -35,7 +35,7 @@ export default async function fetchUser(id: number): Promise<IUser | null> {
 		const deliveredSmsData = fetchUserDeliveredSms(Number(id));
 		const sentSmsData = fetchUserSentSms(Number(id));
 		const pendingSmsData = fetchUserPendingSms(Number(id));
-		const rejectedSmsData = fetchUserRejectedSmsByUserId(Number(id));
+		const rejectedSmsData = fetchUserRejectedSms(Number(id));
 		const paidSmsData = fetchUserPaidSms(Number(id));
 		const adjusmentSmsData = fetchUserAdjusmentSms(Number(id));
 		const paymentHistoryData = fetchUserPaymentHistory(Number(id));

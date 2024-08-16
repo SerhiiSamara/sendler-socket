@@ -13,12 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
-function fetchUserPendingSms(id) {
+function fetchUserRejectedSms(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield db_1.default.query(`SELECT get_sms_by_user(${id}, 'pending') AS pending_sms`);
+        const res = yield db_1.default.query(`SELECT get_sms_by_user(${id}, 'rejected') AS rejected_sms`);
         return res;
     });
 }
-exports.default = fetchUserPendingSms;
+exports.default = fetchUserRejectedSms;
 ;
-//# sourceMappingURL=fetchUserPendingSms.js.map
+//# sourceMappingURL=fetchUserRejectedSms.js.map

@@ -19,7 +19,7 @@ const fetchUserPendingSms_1 = __importDefault(require("./fetchUserPendingSms"));
 const fetchUserSentSms_1 = __importDefault(require("./fetchUserSentSms"));
 const updateUserBalance_1 = __importDefault(require("./updateUserBalance"));
 const fetchUserPaymentHistory_1 = __importDefault(require("./fetchUserPaymentHistory"));
-const fetchUserRejectedSmsByUserId_1 = __importDefault(require("./fetchUserRejectedSmsByUserId"));
+const fetchUserRejectedSms_1 = __importDefault(require("./fetchUserRejectedSms"));
 const fetchUserAlfaNames_1 = __importDefault(require("./fetchUserAlfaNames"));
 const fetchUserDataFromDatabase_1 = __importDefault(require("./fetchUserDataFromDatabase"));
 const fetchUserSmsSendingInProgress_1 = __importDefault(require("./fetchUserSmsSendingInProgress"));
@@ -34,7 +34,7 @@ function fetchUser(id) {
             const deliveredSmsData = (0, fetchUserDeliveredSms_1.default)(Number(id));
             const sentSmsData = (0, fetchUserSentSms_1.default)(Number(id));
             const pendingSmsData = (0, fetchUserPendingSms_1.default)(Number(id));
-            const rejectedSmsData = (0, fetchUserRejectedSmsByUserId_1.default)(Number(id));
+            const rejectedSmsData = (0, fetchUserRejectedSms_1.default)(Number(id));
             const paidSmsData = (0, fetchUserPaidSms_1.default)(Number(id));
             const adjusmentSmsData = (0, fetchUserAdjusmentSms_1.default)(Number(id));
             const paymentHistoryData = (0, fetchUserPaymentHistory_1.default)(Number(id));

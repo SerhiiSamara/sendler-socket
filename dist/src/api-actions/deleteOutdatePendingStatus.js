@@ -13,12 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
-function fetchUserPendingSms(id) {
+function deleteOutdatePendingStatus(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield db_1.default.query(`SELECT get_sms_by_user(${id}, 'pending') AS pending_sms`);
-        return res;
+        yield db_1.default.query(`UPDATE recipients_status
+		SET recipient_status = 'rejected'
+		WHERE recipient_id IN (
+		SELECT rs.recipient_id
+		FROM recipients_status rs
+		INNER JOIN send_groups sg ON sg.group_id = rs.group_id
+		WHERE sg.user_id = ${id} AND rs.recipient_status = 'pending')
+		AND EXTRACT(EPOCH FROM now())-EXTRACT(EPOCH FROM status_changing_date) > 172800;		
+		`);
     });
 }
-exports.default = fetchUserPendingSms;
+exports.default = deleteOutdatePendingStatus;
 ;
-//# sourceMappingURL=fetchUserPendingSms.js.map
+//# sourceMappingURL=deleteOutdatePendingStatus.js.map

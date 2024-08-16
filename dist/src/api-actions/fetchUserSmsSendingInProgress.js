@@ -15,17 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 function fetchUserSmsSendingInProgress(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield db_1.default.query(`SELECT rs.history_id, recipient_status, COUNT(*), to_char(sh.sending_group_date, 'DD.MM.YYYY HH24:MI:SS') AS sending_group_date
-FROM recipients_status rs
-INNER JOIN sending_history sh ON sh.history_id = rs.history_id
-WHERE rs.history_id IN (
-SELECT DISTINCT rs.history_id
-FROM recipients_status rs
-INNER JOIN sending_history sh ON sh.history_id = rs.history_id
-INNER JOIN sending_members sm ON sh.history_id = sm.history_id
-INNER JOIN send_groups sg ON sg.group_id = sm.group_id
-WHERE rs.recipient_status = 'pending' AND sg.user_id = ${id})
-GROUP BY rs.history_id, recipient_status, sh.sending_group_date`);
+        const res = yield db_1.default.query(`SELECT rs.history_id, recipient_status, COUNT(*), to_char(sh.sending_group_date::timestamptz at time zone 'Europe/Vilnius', 'DD.MM.YYYY HH24:MI:SS') AS sending_group_date
+		FROM recipients_status rs
+		INNER JOIN sending_history sh ON sh.history_id = rs.history_id
+		WHERE rs.history_id IN (
+		SELECT DISTINCT rs.history_id
+		FROM recipients_status rs
+		INNER JOIN sending_history sh ON sh.history_id = rs.history_id
+		INNER JOIN send_groups sg ON sg.group_id = rs.group_id
+		WHERE rs.recipient_status = 'pending' AND sg.user_id = ${id})
+		GROUP BY rs.history_id, recipient_status, sh.sending_group_date`);
         // modify sending array
         let sendingInProgress = [];
         for (let i = 0; i < res.rows.length; i = i + 1) {

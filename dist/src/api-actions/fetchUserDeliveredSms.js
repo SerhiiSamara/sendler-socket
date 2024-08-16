@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 function fetchUserDeliveredSms(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield db_1.default.query(`SELECT get_delivered_sms_by_user(${id}) AS delevered_sms`);
+        const res = yield db_1.default.query(`SELECT get_sms_by_user(${id}, 'fullfield') AS delevered_sms`);
         return res;
     });
 }
